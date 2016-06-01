@@ -1,4 +1,5 @@
 source "https://rubygems.org"
 
-gem 'pry-byebug'
-gem 'httparty'
+gem 'password'
+gem 'lastpass'
+gem 'byebug'
