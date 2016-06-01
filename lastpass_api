@@ -5,8 +5,8 @@ require 'yaml'
 require 'highline/import'
 require 'byebug'
 
-require './accounts'
-require './accounts_cache'
+require_relative 'accounts'
+require_relative 'accounts_cache'
 
 class Lastpass
   def self.startup
@@ -52,7 +52,7 @@ class Lastpass
       end
 
       opts.on('cTYPE', '--cache=TYPE') do |type|
-        raise 'Unknown cache option' unless ['nocache', 'reload', 'normal'].include? type
+        raise "Unknown cache option: #{type}" unless ['nocache', 'reload', 'normal'].include? type
         options['cache'] = type
       end
     end.parse!
@@ -66,5 +66,7 @@ class Lastpass
     {}
   end
 end
+
+Dir.chdir(File.dirname(__FILE__))
 
 Lastpass.startup
