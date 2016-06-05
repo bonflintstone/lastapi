@@ -17,4 +17,8 @@ class AccountsCache
   def self.save_cache(accounts)
     File.write(FILE, accounts.to_yaml)
   end
+
+  def self.remove_cache
+    File.delete(FILE)
+  end
 end

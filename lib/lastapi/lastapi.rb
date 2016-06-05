@@ -1,14 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'optparse'
-require 'yaml'
-require 'highline/import'
-require 'byebug'
-
-require_relative 'accounts'
-require_relative 'accounts_cache'
-
-class Lastpass
+class Lastapi
   def self.startup
     accounts = AccountsCache.read_from_cache unless ['nocache', 'reload'].include? config['cache']
     accounts ||= AccountsCache.reload_cache(config) unless config['cache'] == 'nocache'
@@ -66,7 +58,3 @@ class Lastpass
     {}
   end
 end
-
-Dir.chdir(File.dirname(__FILE__))
-
-Lastpass.startup

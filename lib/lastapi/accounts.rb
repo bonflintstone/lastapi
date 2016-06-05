@@ -1,5 +1,3 @@
-require 'lastpass'
-
 class Accounts
   attr_reader :accounts
 
