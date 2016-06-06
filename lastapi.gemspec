@@ -6,7 +6,8 @@ Gem::Specification.new do |s|
   s.description = "An usable command line wrapper around lastpass-ruby"
   s.authors     = ["Frederik Bonfanti"]
   s.email       = 'freddy@railslove.com'
-  s.files       = ["lib/lastapi.rb"]
+  s.files       = ['lib/lastapi.rb', 'lib/lastapi/lastapi.rb', 'lib/lastapi/accounts.rb', 'lib/lastapi/accounts_cache.rb']
+  s.executables << 'lastapi'
   s.homepage    =
     'http://rubygems.org/gems/lastapi'
   s.license       = 'MIT'

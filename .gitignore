@@ -1,3 +1,4 @@
 config.yml
 accounts_cache.yml
 .byebug_history
+**.swp

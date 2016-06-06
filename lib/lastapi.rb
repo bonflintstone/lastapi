@@ -9,5 +9,3 @@ require 'lastpass'
 require_relative 'lastapi/lastapi'
 require_relative 'lastapi/accounts_cache'
 require_relative 'lastapi/accounts'
-
-Lastapi.startup
