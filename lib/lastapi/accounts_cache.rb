@@ -1,24 +1,33 @@
-require 'yaml'
-
 class AccountsCache
-  FILE = 'accounts_cache.yml'
+  CACHE_FILE = File.expand_path '~/.lastapi/accounts_cache.yml'
 
-  def self.read_from_cache
-    return false unless File.exists? FILE
-    YAML.load_file(FILE)
+  def self.load_cache
+    return false unless File.exists? CACHE_FILE
+    salt, data = YAML.load_file(CACHE_FILE)
+    Cypher.set_salt salt
+    Cypher.decrypt data
   end
 
-  def self.reload_cache(config)
-    accounts = Accounts.new(config)
-    save_cache accounts
-    accounts
+  def self.reload_cache
+    save_cache Accounts.new
   end
 
   def self.save_cache(accounts)
-    File.write(FILE, accounts.to_yaml)
+    makedir
+    File.write(CACHE_FILE, [Cypher.salt, Cypher.encrypt(accounts)].to_yaml)
+    accounts
   end
 
   def self.remove_cache
-    File.delete(FILE)
+    File.delete(CACHE_FILE)
+  end
+
+  private
+
+  def self.makedir
+    dirname = File.dirname(CACHE_FILE)
+    unless File.directory?(dirname)
+      FileUtils.mkdir_p(dirname)
+    end
   end
 end

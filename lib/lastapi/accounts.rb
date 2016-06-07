@@ -1,9 +1,8 @@
 class Accounts
   attr_reader :accounts
 
-  def initialize(config)
-    @config = config
-    @accounts = LastPass::Vault.open_remote(config['name'], config['pass']).accounts
+  def initialize
+    @accounts = LastPass::Vault.open_remote(Config.get['login'], Config.get['pass']).accounts
   end
 
   def get_password(account_name)
