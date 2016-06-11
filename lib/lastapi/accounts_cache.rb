@@ -3,9 +3,7 @@ class AccountsCache
 
   def self.load_cache
     return false unless File.exists? CACHE_FILE
-    salt, data = YAML.load_file(CACHE_FILE)
-    Cypher.set_salt salt
-    Cypher.decrypt data
+    YAML.load(Cipher.decrypt(YAML.load(File.open(CACHE_FILE, 'r:utf-8'))))
   end
 
   def self.reload_cache
@@ -14,7 +12,7 @@ class AccountsCache
 
   def self.save_cache(accounts)
     makedir
-    File.write(CACHE_FILE, [Cypher.salt, Cypher.encrypt(accounts)].to_yaml)
+    File.write(CACHE_FILE, Cipher.encrypt(accounts.to_yaml))
     accounts
   end
 

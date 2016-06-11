@@ -16,6 +16,7 @@ class Config
 
     @@config['login'] ||= ask('Please input your Username: ')
     @@config['pass'] ||= ask('Please input your Password: ' ) {|q| q.echo = false}
+    nil
   end
 
   def self.from_yaml
@@ -29,6 +30,7 @@ class Config
       opts.on('-h', '--help', '') { |v| SpecialHandler.help_message }
       opts.on('-lLOGIN', '--login=LOGIN', 'Login name') { |login| @@config['login'] = login }
       opts.on('-pPASSWORD', '--pass=PASSWORD', 'Password') { |pass| @@config['pass'] = pass }
+      opts.on('-y', '--clipboard', 'Clipboard') { @@config['clipboard'] = true }
       opts.on('-fFile', '--config=File', 'Config File') { |file| @@config['config'] = file }
       opts.on('-cTYPE', '--cache=TYPE', 'Cache Type') do |type|
         raise "Unknown cache option: #{type}" unless ['nocache', 'reload', 'normal', 'remove'].include? type

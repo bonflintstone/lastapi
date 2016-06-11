@@ -12,6 +12,12 @@ class Startup
       exit
     end
 
-    puts accounts.get_password ARGV.pop
+    password = accounts.get_password ARGV.pop
+
+    if Config.get['clipboard']
+      `echo #{password} | xsel -i --clipboard`
+    else
+      puts passowrd
+    end
   end
 end
