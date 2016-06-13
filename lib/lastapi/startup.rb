@@ -15,7 +15,7 @@ class Startup
     password = accounts.get_password ARGV.pop
 
     if Config.get['clipboard']
-      `echo #{password} | xsel -i --clipboard`
+      `echo '#{password}' | xsel -i --clipboard`
     else
       puts password
     end
